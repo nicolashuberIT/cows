@@ -1,5 +1,5 @@
 /*
-   V20220817.ino
+   main.ino
    Concepted and written by Nicolas Huber
    Last updated: 20220914
 */
