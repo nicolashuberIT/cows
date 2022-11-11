@@ -52,7 +52,7 @@ HX711MULTI scales(CHANNEL_COUNT, DOUTS, CLK);
 
 File myFile;
 
-////////// SETUP FUNCTION//////////
+////////// SETUP FUNCTION //////////
 
 void setup() {
 
@@ -83,7 +83,7 @@ void setup() {
 
 }
 
-////////// MAIN FUNCTION//////////
+////////// MAIN FUNCTION //////////
 
 void loop() {
 
