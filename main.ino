@@ -269,7 +269,7 @@ int getDataLeft(){
     scales.read(results);
 
     int input_left = -results[0];
-    int data_left = f(input_left);
+    int data_left = input_left;
 
     return data_left;
 
@@ -280,7 +280,7 @@ int getDataRight(){
     scales.read(results);
 
     int input_right = -results[0];
-    int data_right = f(input_right);
+    int data_right = input_right;
 
     return data_right;
 
