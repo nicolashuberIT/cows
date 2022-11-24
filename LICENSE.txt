@@ -6,7 +6,7 @@
 
 -----
 
-_This source code license is by and between Nicolas Huber (Software Provider) and licensee._
+_This source code license is by and between Nicolas Huber (software provider) and licensee._
 
 ## 1) Version
 
@@ -47,10 +47,6 @@ Nicolas Huber makes no guarantee as to the source code's performance once it has
 
 ## 6) Liability
 
-Under no circumstances will either party or their representative be liable to each other for incidental, consequental, or indirect damages including but not limited to lost or damaged data, revenue loss, economic loss, or commercial loss arising out of a breach of any terms and conditions set forth in this source code license agreement.
-
-This limitation of liability shall apply regardless of if the alleged breach is a fundamental breach or fundamental term.
-
 The licensee is to keep in mind that this software is in an experimental state. Thus, Under no circumstances will Nicolas Huber be held liable for any damage resulting from the use of this software.
 
 ## 7) Term & Termination
@@ -84,8 +80,12 @@ Software provider: Nicolas Huber, nicolas.paragliding@bluewin.ch
 
 Agreement: The licensee is considered as such at the point of downloading the software. Only a complete deletion of the software terminates the agreement.
 
+## 10) Reference
+
+Based on: https://www.pandadoc.com/source-code-license-agreement-template/ [24.11.2022; 5 pm]
+
 ------
 
-Nicolas Huber
-nicolas.paragliding@bluewin.ch
+© Nicolas Huber |
+nicolas.paragliding@bluewin.ch |
 www.nicolas-paragliding.com
