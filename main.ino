@@ -1,10 +1,15 @@
 /*
    main.ino
    Concepted and written by Nicolas Huber
-   Last updated: 20220914
+   Last updated: 20221123
 */
 
 ////////// BASICS //////////
+
+// SENSORS (to disable sensor set value to 0, other 1)
+
+int left = 1;
+int right = 1;
 
 // ------ LIBRARIES ------
 
@@ -46,7 +51,7 @@ HX711MULTI scales(CHANNEL_COUNT, DOUTS, CLK);
 
 // ------ BUZZER ------
 
-#define buzzer 40
+#define buzzer 37
 
 // ------ SD CARD ------
 
@@ -56,25 +61,11 @@ File myFile;
 
 void setup() {
 
-    pinMode(buzzer, OUTPUT);
+    tone(52, 220, 500);
 
-    SD.begin(50);
-    myFile = SD.open("flight.txt, FILE_WRITE");
-    myFile = SD.open("flight.txt", FILE_WRITE);
-    myFile.print("time stamp");
-    myFile.print(",");
-    myFile.print("data_left");
-    myFile.print(",");
-    myFile.print("average_left");
-    myFile.print(",");
-    myFile.print("danger_index_left");
-    myFile.print(",");
-    myFile.print("data_right");
-    myFile.print(",");
-    myFile.print("average_right");
-    myFile.print(",");
-    myFile.print("danger_index_right");
-    myFile.close();
+    Serial.begin(9600);
+
+    pinMode(buzzer, OUTPUT);
 
     myGLCD.InitLCD();
     myGLCD.setFont(SmallFont);
@@ -123,9 +114,8 @@ void loop() {
 
 // ------ WARNINGS ------
 
-    danger_index_left = getDangerIndexLeft(average_left, data_left);
-    danger_index_right = getDangerIndexRight(average_right, data_right);
-    displayDangerIndex(danger_index_left, danger_index_right);
+    danger_index_left = getDangerIndexLeft(average_left, data_left, left);
+    danger_index_right = getDangerIndexRight(average_right, data_right, right);
     visualWarning(danger_index_left, danger_index_right);
     audioWarning(danger_index_left, danger_index_right);
 
@@ -133,9 +123,10 @@ void loop() {
 
     resetGraphs(milliseconds);
 
-// ------ SD CARD ------
 
-    saveDataToSD(milliseconds, data_left, data_right, average_left, average_right, danger_index_left, danger_index_right);
+// ------ SERIAL PRINT ------
+
+    serialPrint(milliseconds, data_left, data_right, average_left, average_right, danger_index_left, danger_index_right);
 
 }
 
@@ -144,6 +135,9 @@ void loop() {
 void setupInterface(){
 
     // ------ INTERFACING ------
+
+    myGLCD.setColor(0, 0, 0);
+    myGLCD.fillRect(0, 0, 480, 320);
 
     // Kopfzeile
 
@@ -268,8 +262,12 @@ int getDataLeft(){
 
     scales.read(results);
 
-    int input_left = -results[0];
-    int data_left = input_left;
+    int input_left = results[0];
+    int data_left = abs(input_left * 0.0001);
+
+    if(data_left > 60){
+      int data_left = 60;
+      return data_left;    }
 
     return data_left;
 
@@ -279,8 +277,13 @@ int getDataRight(){
 
     scales.read(results);
 
-    int input_right = -results[0];
-    int data_right = input_right;
+    int input_right = results[1];
+    int data_right = abs(input_right * 0.0001);
+
+    if(data_right > 60){
+      int data_right = 60;
+      return data_right;
+    }
 
     return data_right;
 
@@ -379,14 +382,18 @@ void graphingLeft(int runtime_sec, int data_left, int average_left){
     int y_left = y_raw_left * -1.1667 + 127;
     int y_average_left = y_average_raw_left * -1.1667 + 127;
 
-    myGLCD.setColor(223, 242, 166);
-    myGLCD.fillRect(x_left, y_average_left, x_left + 4, 127);
-    myGLCD.setColor(189, 255, 0);
-    myGLCD.drawLine(x_left, y_left, x_left, 127);
+    if (y_left > 0){
 
-    if (average_left - data_left >= 15) {
-        myGLCD.setColor(RED);
-        myGLCD.drawLine(x_left, y_left, x_left, 127);
+      myGLCD.setColor(223, 242, 166);
+      myGLCD.fillRect(x_left, y_average_left, x_left + 4, 127);
+      myGLCD.setColor(189, 255, 0);
+      myGLCD.drawLine(x_left, y_left, x_left, 127);
+  
+      if (average_left - data_left >= 15) {
+          myGLCD.setColor(RED);
+          myGLCD.drawLine(x_left, y_left, x_left, 127);
+      }
+      
     }
 
 }
@@ -414,56 +421,45 @@ void graphingRight(int runtime_sec, int data_right, int average_right){
 
 }
 
-int getDangerIndexLeft(int average_left, int data_left){
+int getDangerIndexLeft(int average_left, int data_left, int left){
 
-    int grenzwert_left = (-0.4142*data_left) - 0.1975;
+    int grenzwert_left = abs((-0.4142*data_left) - 0.1975);
 
-    if(data_left - average_left <= grenzwert_left){
+    if(abs(data_left - average_left <= grenzwert_left)){
         int danger_index_left;
-        return danger_index_left = 2;
+        return danger_index_left = 2*left;
     }
 
     else if(average_left > data_left){
         int danger_index_left;
-        return danger_index_left = 1;
+        return danger_index_left = 1*left;
     }
 
     else {
         int danger_index_left;
-        return danger_index_left = 0;
+        return danger_index_left = 0*left;
     }
 
 }
 
-int getDangerIndexRight(int average_right, int data_right){
+int getDangerIndexRight(int average_right, int data_right, int right){
 
-    int grenzwert_right = (-0.4142*data_right) - 0.1975;
+    int grenzwert_right = abs((-0.4142*data_right) - 0.1975);
 
-    if(data_right - average_right <= grenzwert_right){
+    if(abs(data_right - average_right) <= grenzwert_right){
         int danger_index_right;
-        return danger_index_right = 2;
+        return danger_index_right = 2*right;
     }
 
     else if(average_right > data_right){
         int danger_index_right;
-        return danger_index_right = 1;
+        return danger_index_right = 1*right;
     }
 
     else {
         int danger_index_right;
-        return danger_index_right = 0;
+        return danger_index_right = 0*right;
     }
-
-}
-
-void displayDangerIndex(int danger_index_left, int danger_index_right){
-
-    myGLCD.setBackColor(BLACK);
-    myGLCD.setColor(WHITE);
-    myGLCD.setFont(BigFont);
-    myGLCD.printNumI(danger_index_left, 0, 0);
-    myGLCD.printNumI(danger_index_right, 0, 0);
-    myGLCD.setFont(SmallFont);
 
 }
 
@@ -487,7 +483,7 @@ void visualWarning(int danger_index_left, int danger_index_right){
         myGLCD.print("L", 18, 278);
     }
 
-    else if (danger_index_left == 2) {
+    else if (danger_index_left == 0) {
         myGLCD.setColor(0, 153, 76);
         myGLCD.fillRect(0, 28, 40, 304);
         myGLCD.setBackColor(0, 153, 76);
@@ -525,20 +521,15 @@ void visualWarning(int danger_index_left, int danger_index_right){
 
 void audioWarning(int danger_index_left, int danger_index_right){
 
-    if(danger_index_left || danger_index_right == 2){
+    if(danger_index_left == 2 || danger_index_right == 2){
 
-        tone(40, 220, 500);
-        tone(40, 440, 500);
-        tone(40, 880, 800);
-        tone(40, 440, 800);
+        // tone(37, 400, 1000);
+        // delay(100);
+        // tone(37, 200, 1000);
+        // delay(1000);
 
-        delay(500);
-        tone(40, 220, 500);
-        tone(40, 440, 500);
-        tone(40, 880, 800);
-        tone(40, 440, 800);
     }
-
+    
 }
 
 void resetGraphs(int milliseconds){
@@ -571,22 +562,28 @@ void resetGraphs(int milliseconds){
 
 }
 
-void saveDataToSD(int milliseconds, int data_left, int data_right, int average_left, int average_right, int danger_index_left, int danger_index_right){
+void serialPrint(int milliseconds, int data_left, int data_right, int average_left, int average_right, int danger_index_left, int danger_index_right){
 
-    myFile = SD.open("flight.txt", FILE_WRITE);
-    myFile.print(milliseconds);
-    myFile.print(",");
-    myFile.print(data_left);
-    myFile.print(",");
-    myFile.print(average_left);
-    myFile.print(",");
-    myFile.print(danger_index_left);
-    myFile.print(",");
-    myFile.print(data_right);
-    myFile.print(",");
-    myFile.print(average_right);
-    myFile.print(",");
-    myFile.print(danger_index_right);
-    myFile.close();
+   Serial.print("Data_left, Data_right, Average_left, Average_right, Danger_index_left, Danger_index_right: ");
+   Serial.print(data_left);
+   Serial.print(",");
+   Serial.print(data_right);
+   Serial.print(",");
+   Serial.print(average_left);
+   Serial.print(",");
+   Serial.print(average_right);
+   Serial.print(",");
+   Serial.print(danger_index_left);
+   Serial.print(",");
+   Serial.print(danger_index_right);
 
+   if(danger_index_left*left == 2 || danger_index_right*right == 2){
+
+   Serial.print(",");     
+   Serial.print(" ------> ### DANGER ### <------");
+
+    }
+   
+   Serial.println();  
+ 
 }
