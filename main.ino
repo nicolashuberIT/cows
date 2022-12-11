@@ -1,15 +1,25 @@
 /*
-   main.ino
+   20221123.ino
    Concepted and written by Nicolas Huber
    Last updated: 20221123
 */
 
-////////// BASICS //////////
+////////// PARAMETERS //////////
 
-// SENSORS (to disable sensor set value to 0, other 1)
+// TONE (to disable tone set value to 0, other 1)
+
+int index_tone = 0;
+
+// WARNINGS (to disable warnings set value to 0, other 1)
 
 int left = 1;
-int right = 1;
+int right = 0;
+
+// SENSITIVITY (the smaller the following parameter, the more sensitive the system reacts to changes in data)
+
+int sensitivity = 1.25;
+
+////////// BASICS //////////
 
 // ------ LIBRARIES ------
 
@@ -121,7 +131,7 @@ void loop() {
 
 // ------ RESET DISPLAY ------
 
-    resetGraphs(milliseconds);
+    resetGraphs(runtime_sec);
 
 
 // ------ SERIAL PRINT ------
@@ -162,9 +172,9 @@ void setupInterface(){
     myGLCD.setColor(64, 74, 4);
     myGLCD.setBackColor(196, 192, 192);
     myGLCD.print("rec. ", 50, 273);
-    myGLCD.print("kg", 104, 273);
+    myGLCD.print("n", 104, 273);
     myGLCD.print("av. ", 50, 286);
-    myGLCD.print("kg", 104, 286);
+    myGLCD.print("n", 104, 286);
 
 
     // Datenbox rechte Schirmseite
@@ -189,7 +199,7 @@ void setupInterface(){
     myGLCD.fillRect(50, 35, 428, 143);
     myGLCD.setColor(WHITE);
     myGLCD.setBackColor(102, 102, 102);
-    myGLCD.print("linke Schirmseite", 177, 40);
+    myGLCD.print("Beschleunigerleine", 177, 40);
 
     myGLCD.setColor(WHITE);
     myGLCD.drawLine(70, 57, 70, 128);
@@ -205,11 +215,11 @@ void setupInterface(){
     myGLCD.drawLine(70, 114, 75, 114);
     myGLCD.drawLine(403, 114, 408, 114);
 
-    myGLCD.print("[kg]", 68, 40);
+    myGLCD.print("[n]", 68, 40);
     myGLCD.print("[t]", 235, 132);
 
-    myGLCD.print("60", 53, 53);
-    myGLCD.print("30", 53, 89);
+    myGLCD.print(" +", 53, 53);
+    myGLCD.print("", 53, 89);
     myGLCD.print("0", 61, 124);
 
     // Graphing-Feld rechte Schirmseite
@@ -218,7 +228,7 @@ void setupInterface(){
     myGLCD.fillRect(50, 153, 428, 261);
     myGLCD.setColor(WHITE);
     myGLCD.setBackColor(102, 102, 102);
-    myGLCD.print("rechte Schirmseite", 177, 158);
+    myGLCD.print("Vord. Leinenebene", 177, 158);
 
     myGLCD.setColor(WHITE);
     myGLCD.drawLine(70, 175, 70, 246);
@@ -237,8 +247,8 @@ void setupInterface(){
     myGLCD.print("[kg]", 68, 158);
     myGLCD.print("[t]", 235, 250);
 
-    myGLCD.print("60", 53, 171);
-    myGLCD.print("30", 53, 209);
+    myGLCD.print(" +", 53, 171);
+    myGLCD.print("", 53, 209);
     myGLCD.print("0", 61, 243);
 }
 
@@ -263,11 +273,11 @@ int getDataLeft(){
     scales.read(results);
 
     int input_left = results[0];
-    int data_left = abs(input_left * 0.0001);
+    int data_left = abs(input_left * 0.001);
 
     if(data_left > 60){
-      int data_left = 60;
-      return data_left;    }
+        int data_left = 60;
+        return data_left;    }
 
     return data_left;
 
@@ -278,11 +288,11 @@ int getDataRight(){
     scales.read(results);
 
     int input_right = results[1];
-    int data_right = abs(input_right * 0.0001);
+    int data_right = abs(input_right * 0.001);
 
     if(data_right > 60){
-      int data_right = 60;
-      return data_right;
+        int data_right = 60;
+        return data_right;
     }
 
     return data_right;
@@ -384,16 +394,16 @@ void graphingLeft(int runtime_sec, int data_left, int average_left){
 
     if (y_left > 0){
 
-      myGLCD.setColor(223, 242, 166);
-      myGLCD.fillRect(x_left, y_average_left, x_left + 4, 127);
-      myGLCD.setColor(189, 255, 0);
-      myGLCD.drawLine(x_left, y_left, x_left, 127);
-  
-      if (average_left - data_left >= 15) {
-          myGLCD.setColor(RED);
-          myGLCD.drawLine(x_left, y_left, x_left, 127);
-      }
-      
+        myGLCD.setColor(223, 242, 166);
+        myGLCD.fillRect(x_left, y_average_left, x_left + 4, 127);
+        myGLCD.setColor(189, 255, 0);
+        myGLCD.drawLine(x_left, y_left, x_left, 127);
+
+        if (average_left - data_left >= 15) {
+            myGLCD.setColor(RED);
+            myGLCD.drawLine(x_left, y_left, x_left, 127);
+        }
+
     }
 
 }
@@ -425,7 +435,7 @@ int getDangerIndexLeft(int average_left, int data_left, int left){
 
     int grenzwert_left = abs((-0.4142*data_left) - 0.1975);
 
-    if(abs(data_left - average_left <= grenzwert_left)){
+    if(abs(data_left - average_left)*sensitivity <= grenzwert_left){
         int danger_index_left;
         return danger_index_left = 2*left;
     }
@@ -446,7 +456,7 @@ int getDangerIndexRight(int average_right, int data_right, int right){
 
     int grenzwert_right = abs((-0.4142*data_right) - 0.1975);
 
-    if(abs(data_right - average_right) <= grenzwert_right){
+    if(abs(data_right - average_right)*sensitivity<= grenzwert_right){
         int danger_index_right;
         return danger_index_right = 2*right;
     }
@@ -521,24 +531,25 @@ void visualWarning(int danger_index_left, int danger_index_right){
 
 void audioWarning(int danger_index_left, int danger_index_right){
 
-    if(danger_index_left == 2 || danger_index_right == 2){
+    if(index_tone == 1){
 
-        // tone(37, 400, 1000);
-        // delay(100);
-        // tone(37, 200, 1000);
-        // delay(1000);
+        if(danger_index_left == 2 || danger_index_right == 2){
+
+            tone(37, 400, 1000);
+            delay(100);
+            tone(37, 200, 1000);
+            delay(1000);
+        }
 
     }
-    
+
+    else {}
+
 }
 
 void resetGraphs(int milliseconds){
 
-    int old_reset = 0;
-    int new_reset = millis();
-
-    if ((milliseconds / 1000) % 60 == 0 ) {
-        old_reset = new_reset;
+    if (milliseconds % 60 == 0 ) {
 
         // upper graphing box (lefthand side)
 
@@ -564,26 +575,35 @@ void resetGraphs(int milliseconds){
 
 void serialPrint(int milliseconds, int data_left, int data_right, int average_left, int average_right, int danger_index_left, int danger_index_right){
 
-   Serial.print("Data_left, Data_right, Average_left, Average_right, Danger_index_left, Danger_index_right: ");
-   Serial.print(data_left);
-   Serial.print(",");
-   Serial.print(data_right);
-   Serial.print(",");
-   Serial.print(average_left);
-   Serial.print(",");
-   Serial.print(average_right);
-   Serial.print(",");
-   Serial.print(danger_index_left);
-   Serial.print(",");
-   Serial.print(danger_index_right);
+    Serial.print("Index: data, average, danger index | ");
+    Serial.print(data_left);
+    Serial.print(" [kg],");
+    Serial.print(average_left);
+    Serial.print(" [kg],");
+    Serial.print(danger_index_left);
+    Serial.print(" [i] |");
 
-   if(danger_index_left*left == 2 || danger_index_right*right == 2){
+    if(danger_index_left*left == 2 || danger_index_right*right == 2){
 
-   Serial.print(",");     
-   Serial.print(" ------> ### DANGER ### <------");
+        Serial.print("");
+        Serial.print(" ----> !!! SERIOUS DANGER !!! <----");
 
     }
-   
-   Serial.println();  
- 
+
+    else if(danger_index_left*left == 1 || danger_index_right*right == 1){
+
+        Serial.print("");
+        Serial.print(" ----> ??? POTENTIAL DANGER ??? <----");
+
+    }
+
+    else{
+
+        Serial.print("");
+        Serial.print(" ----> ... SAFE FLIGHT ... <----");
+
+    }
+
+    Serial.println();
+
 }
