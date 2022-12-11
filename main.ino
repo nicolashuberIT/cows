@@ -252,7 +252,7 @@ void setupInterface(){
     myGLCD.print("0", 61, 243);
 }
 
-int calculateTime(unsigned long milliseconds){
+int calculateTime(int milliseconds){
 
     int runtime_sec = (milliseconds / 1000) % 60;
     return runtime_sec;
