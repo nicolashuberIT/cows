@@ -1,5 +1,5 @@
 /*
-   20221123.ino
+   main.ino
    Concepted and written by Nicolas Huber
    Last updated: 20221123
 */
@@ -549,7 +549,7 @@ void audioWarning(int danger_index_left, int danger_index_right){
 
 void resetGraphs(int milliseconds){
 
-    if (milliseconds % 60 == 0 ) {
+    if ((milliseconds/1000) % 60 == 0 ) {
 
         // upper graphing box (lefthand side)
 
