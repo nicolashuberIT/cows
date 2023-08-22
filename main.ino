@@ -8,12 +8,12 @@
 
 // TONE (to disable tone set value to 0, other 1)
 
-int index_tone = 0;
+int index_tone = 1;
 
 // WARNINGS (to disable warnings set value to 0, other 1)
 
 int left = 1;
-int right = 0;
+int right = 1;
 
 // SENSITIVITY (the smaller the following parameter, the more sensitive the system reacts to changes in data)
 

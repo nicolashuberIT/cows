@@ -1,7 +1,7 @@
 # COWS
  This page provides an intelligent collapse warning system to tackle the risk issues in the beautiful sport of paragliding. Happy landing!
 
-Learn more (German): https://nicolas-paragliding.com
+Feel free to contact the author (Nicolas Huber) for any questions or suggestions: **info@nicolas-huber.ch**.
 
 --- 
 

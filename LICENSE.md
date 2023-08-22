@@ -10,7 +10,7 @@ _This source code license is by and between Nicolas Huber (software provider) an
 
 ## 1) Version
 
-Last updated: 24.11.2022
+Last updated: 22/08/2023
 
 ## 2) Basics
 
@@ -87,5 +87,5 @@ Based on: https://www.pandadoc.com/source-code-license-agreement-template/ [24.1
 ------
 
 © Nicolas Huber |
-nicolas.paragliding@bluewin.ch |
-www.nicolas-paragliding.com
+info@nicolas-huber.ch |
+www.nicolas-huber.ch
