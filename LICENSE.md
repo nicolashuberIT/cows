@@ -76,7 +76,7 @@ Modification: No terms and conditions on this agreement shall be modified or rep
 Any and all notifications with regard to this source code license agreement shall be delivered by email listed below.
 
 Licensee: anybody
-Software provider: Nicolas Huber, nicolas.paragliding@bluewin.ch
+Software provider: Nicolas Huber, info@nicolas-huber.ch
 
 Agreement: The licensee is considered as such at the point of downloading the software. Only a complete deletion of the software terminates the agreement.
 
