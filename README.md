@@ -11,9 +11,7 @@
 
 ## Overview
 
-This page provides an intelligent collapse warning system to tackle the risk issues in the beautiful sport of paragliding. Happy landing!
-
-Feel free to contact the author (Nicolas Huber) for any questions or suggestions: **info@nicolas-huber.ch**.
+Overview will follow soon.
 
 ---
 
@@ -48,7 +46,9 @@ COWS
 
 ### Contributing
 
-At this time, the `flight-analyzer` project is not open for community contributions. The development is currently handled exclusively by Nicolas Huber. Your interest is appreciated and this section will be updated if the policy changes in the future.
+At this time, the `COWS` project is not open for community contributions. The development is currently handled exclusively by Nicolas Huber. Your interest is appreciated and this section will be updated if the policy changes in the future.
+
+Feel free to contact the author (Nicolas Huber) for any questions or suggestions: **info@nicolas-huber.ch**.
 
 ### Changelog
 
