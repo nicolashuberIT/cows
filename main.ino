@@ -1,7 +1,8 @@
 /*
    main.ino
    Concepted and written by Nicolas Huber
-   Last updated: 20221123
+   Version: 20221123
+   Updated by 2024-03-31 as of the Schweizer Jugend forscht 2024 initiative
 */
 
 ////////// PARAMETERS //////////
@@ -62,10 +63,6 @@ HX711MULTI scales(CHANNEL_COUNT, DOUTS, CLK);
 // ------ BUZZER ------
 
 #define buzzer 37
-
-// ------ SD CARD ------
-
-File myFile;
 
 ////////// SETUP FUNCTION //////////
 
@@ -132,7 +129,6 @@ void loop() {
 // ------ RESET DISPLAY ------
 
     resetGraphs(runtime_sec);
-
 
 // ------ SERIAL PRINT ------
 
