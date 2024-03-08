@@ -151,7 +151,7 @@ void setupInterface(){
     myGLCD.fillRect(0, 0, 479, 26);
     myGLCD.setColor(255, 255, 255);
     myGLCD.setBackColor(64, 52, 235);
-    myGLCD.print("FLIEGEN AM LIMIT - Klapperwarnsystem", CENTER, 9);
+    myGLCD.print("Klapperwarnsystem", CENTER, 9);
 
     // Fusszeile
 
@@ -159,7 +159,7 @@ void setupInterface(){
     myGLCD.fillRect(0, 306, 479, 319);
     myGLCD.setBackColor(64, 64, 64);
     myGLCD.setColor(255, 255, 0);
-    myGLCD.print("www.nicolas-paragliding.com", CENTER, 307);
+    myGLCD.print("www.nicolas-huber.ch", CENTER, 307);
 
     // Datenbox linke Schirmseite
 
@@ -195,7 +195,7 @@ void setupInterface(){
     myGLCD.fillRect(50, 35, 428, 143);
     myGLCD.setColor(WHITE);
     myGLCD.setBackColor(102, 102, 102);
-    myGLCD.print("Beschleunigerleine", 177, 40);
+    myGLCD.print("Linke Schirmseite", 177, 40);
 
     myGLCD.setColor(WHITE);
     myGLCD.drawLine(70, 57, 70, 128);
@@ -224,7 +224,7 @@ void setupInterface(){
     myGLCD.fillRect(50, 153, 428, 261);
     myGLCD.setColor(WHITE);
     myGLCD.setBackColor(102, 102, 102);
-    myGLCD.print("Vord. Leinenebene", 177, 158);
+    myGLCD.print("Rechte Schirmseite", 177, 158);
 
     myGLCD.setColor(WHITE);
     myGLCD.drawLine(70, 175, 70, 246);
