@@ -15,18 +15,6 @@ Overview will follow soon.
 
 ---
 
-## License & Intellectual Property
-
-The source code of this application is licensed under the license linked [here](LICENSE.md).
-
-If not stated differently, the source code of this project is Nicolas Huber's intellectual property. External sources can be found in the code and are marked as such. 
-
-In consideration of the `LICENSE.md`, the licensee, who is considered as such at the point of downloading this application, agrees to respect the terms and conditions. The licensee undertakes to show respect for Nicolas Huber's intellectual property and to use it only in accordance with his instructions.
-
-Thanks for noticing! 
-
----
-
 ## Technical documentation
 
 ### Introduction
@@ -38,10 +26,11 @@ Introduction will follow soon.
 The application is structured as follows:
 
 ```txt
-COWS
-|-- main.ino
-|-- LICENSE.md
-|-- README.md
+⎡ COWS
+⎢ ⟶ main.ino
+⎢ ⟶ LICENSE.md
+⎢ ⟶ README.md
+⎣
 ```
 
 ### Contributing
@@ -53,6 +42,18 @@ Feel free to contact the author (Nicolas Huber) for any questions or suggestions
 ### Changelog
 
 - **[1.0.0]** - Not released yet.
+
+---
+
+## License & Intellectual Property
+
+The source code of this application is licensed under the license linked [here](LICENSE.md).
+
+If not stated differently, the source code of this project is Nicolas Huber's intellectual property. External sources can be found in the code and are marked as such. 
+
+In consideration of the `LICENSE.md`, the licensee, who is considered as such at the point of downloading this application, agrees to respect the terms and conditions. The licensee undertakes to show respect for Nicolas Huber's intellectual property and to use it only in accordance with his instructions.
+
+Thanks for noticing! 
 
 ---
 
