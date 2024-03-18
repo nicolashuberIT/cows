@@ -9,7 +9,7 @@
 
 // TONE (to disable tone set value to 0, other 1)
 
-int index_tone = 1;
+int index_tone = 0;
 
 // WARNINGS (to disable warnings set value to 0, other 1)
 
@@ -60,6 +60,12 @@ long int results[CHANNEL_COUNT];
 
 HX711MULTI scales(CHANNEL_COUNT, DOUTS, CLK);
 
+// ------ TIME TRACKING ------
+
+unsigned long startTime;
+unsigned long previousTime;
+const unsigned long interval = 30000;
+
 // ------ BUZZER ------
 
 #define buzzer 37
@@ -71,6 +77,10 @@ void setup() {
     tone(52, 220, 500);
 
     Serial.begin(9600);
+
+    startTime = millis();
+    previousTime = 0;
+
 
     pinMode(buzzer, OUTPUT);
 
@@ -87,6 +97,9 @@ void loop() {
 
 // ------ VARIABLES ------
 
+    unsigned long currentTime;
+    unsigned long elapsedTime;
+    unsigned long runtime;
     int milliseconds;
     int runtime_sec;
     int data_left;
@@ -98,8 +111,15 @@ void loop() {
 
 // ------ RUNTIME ------
 
-    milliseconds = millis();
-    runtime_sec = calculateTime(milliseconds);
+    currentTime = millis();
+    elapsedTime = currentTime - previousTime;
+
+    if (elapsedTime >= interval) {
+      previousTime = currentTime;
+      elapsedTime = 0;
+    }
+
+    runtime_sec = calculateTime(elapsedTime);
     displayTime(runtime_sec);
 
 // ------  INPUT DATA ------
@@ -132,7 +152,13 @@ void loop() {
 
 // ------ SERIAL PRINT ------
 
-    serialPrint(milliseconds, data_left, data_right, average_left, average_right, danger_index_left, danger_index_right);
+    serialPrint(runtime_sec, data_left, data_right, average_left, average_right, danger_index_left, danger_index_right);
+
+// ------ RESET TIME ------
+
+    if (millis() - startTime >= interval) {
+    startTime = millis();
+  }
 
 }
 
@@ -151,7 +177,7 @@ void setupInterface(){
     myGLCD.fillRect(0, 0, 479, 26);
     myGLCD.setColor(255, 255, 255);
     myGLCD.setBackColor(64, 52, 235);
-    myGLCD.print("Klapperwarnsystem", CENTER, 9);
+    myGLCD.print("COWS - The Clever Collapse Warning System", CENTER, 9);
 
     // Fusszeile
 
@@ -180,9 +206,9 @@ void setupInterface(){
     myGLCD.setColor(64, 74, 4);
     myGLCD.setBackColor(196, 192, 192);
     myGLCD.print("rec. ", 363, 273);
-    myGLCD.print("kg", 416, 273);
+    myGLCD.print("n", 416, 273);
     myGLCD.print("av. ", 363, 286);
-    myGLCD.print("kg", 416, 286);
+    myGLCD.print("n", 416, 286);
 
     // Datenbox Laufzeit
 
@@ -249,11 +275,11 @@ void setupInterface(){
 }
 
 int calculateTime(int milliseconds){
-
-    int runtime_sec = (milliseconds / 1000) % 60;
-    return runtime_sec;
-
+    int runtime_sec = (milliseconds / 1000 % 60);
+    int adjusted_runtime_sec = (runtime_sec <= 32) ? runtime_sec : (32 + 32 - runtime_sec);
+    return abs(adjusted_runtime_sec);
 }
+
 
 void displayTime(int runtime_sec){
 
@@ -384,7 +410,7 @@ void graphingLeft(int runtime_sec, int data_left, int average_left){
     int y_raw_left = data_left;
     int y_average_raw_left = average_left;
 
-    int x_left = x_raw_left * 5.3833 + 76;
+    int x_left = (x_raw_left * 10.7 + 76);
     int y_left = y_raw_left * -1.1667 + 127;
     int y_average_left = y_average_raw_left * -1.1667 + 127;
 
@@ -410,7 +436,7 @@ void graphingRight(int runtime_sec, int data_right, int average_right){
     int y_raw_right = data_right;
     int y_average_raw_right = average_right;
 
-    int x_right = x_raw_right * 5.3833 + 76;
+    int x_right = (x_raw_right * 10.7 + 76);
     int y_right = y_raw_right * -1.1667 + 245;
     int y_average_right = y_average_raw_right * -1.1667 + 245;
 
@@ -543,9 +569,9 @@ void audioWarning(int danger_index_left, int danger_index_right){
 
 }
 
-void resetGraphs(int milliseconds){
+void resetGraphs(int runtime){
 
-    if ((milliseconds/1000) % 60 == 0 ) {
+    if (runtime % 30 == 0 ) {
 
         // upper graphing box (lefthand side)
 
@@ -571,7 +597,9 @@ void resetGraphs(int milliseconds){
 
 void serialPrint(int milliseconds, int data_left, int data_right, int average_left, int average_right, int danger_index_left, int danger_index_right){
 
-    Serial.print("Index: data, average, danger index | ");
+    Serial.print("Index: time, data, average, danger index | ");
+    Serial.print(milliseconds);
+    Serial.print(" [s], ");
     Serial.print(data_left);
     Serial.print(" [kg],");
     Serial.print(average_left);
