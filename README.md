@@ -11,7 +11,52 @@
 
 ## Overview
 
-Overview will follow soon.
+The `COWS` system is part of the scientific paper "Fliegen am Limit - Aktive Sicherheit im Gleitschirmsport", that was first published on 10/24/2022 and is being further developped by 03/31/2024 as of the "Schweizer Jugend forscht 2024" initiative. In summary, this tool implements the algorithms and concepts developed in the paper for the prediction of dangerous flight conditions in a system that works reliably under laboratory conditions. Please find a detailed description of the tool in the paper.
+
+Both the original and updated paper are listed below: 
+
+<table style="width:100%">
+  <tr>
+    <th>Date</th>
+    <th>Description</th>
+    <th>Author</th>
+    <th>Supervisor</th>
+    <th>Context</th>
+    <th>Link</th>
+  </tr>
+  <tr>
+    <td>10/24/2022</td>
+    <td>Original paper</td>
+    <td>Nicolas Huber</td>
+    <td>Albert Kern</td>
+    <td>Kantonsschule Zürcher Oberland (KZO)</td>
+    <td><a href="https://nicolas-huber.ch/docs/20221220_maturitaetsarbeit_fliegen-am-limit_public-version_nicolas-huber.pdf" target="_blank">nicolas-huber.ch</a></td>
+  </tr>
+  <tr>
+    <td>03/31/2024</td>
+    <td>Updated paper</td>
+    <td>Nicolas Huber</td>
+    <td>Albert Kern, Ronald Luijten</td>
+    <td>Schweizer Jugend forscht (SJf)</td>
+    <td><a href="https://nicolas-huber.ch/docs/20240331_SJf_fliegen-am-limit_wettbewerbsarbeit-2024_nicolas-huber.pdf" target="_blank">nicolas-huber.ch</a></td>
+  </tr>
+</table>
+
+If you'd like to use the content of both this documentation and the revised paper, please cite as follows:
+
+<table>
+<tr>
+  <th>Attribution</th>
+</tr>
+<tr>
+  <td>Huber, Nicolas (2024): <i>Fliegen am Limit - Aktive Sicherheit im Gleitschirmsport</i>, Zürich: Kantonsschule Zürcher Oberland (KZO) & Schweizer Jugend forscht (SJf).</td>
+</tr>
+</table>
+
+Thank you for your dedication to proper attribution. Happy reading & always happy landing!
+
+All the best, <br>
+Nicolas
 
 ---
 
