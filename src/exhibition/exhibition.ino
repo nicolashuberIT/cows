@@ -16,7 +16,7 @@ int index_tone = 0; // no tone at exhibition, only visual output
 // WARNINGS (to disable warnings set value to 0, other 1)
 
 int left = 1; // left sensor built into accelerator
-int right = 0; // right sensor built into A-line
+int right = 1; // right sensor built into A-line
 
 // SENSITIVITY (the smaller the following parameter, the more sensitive the system reacts to changes in data)
 
@@ -223,7 +223,7 @@ void setupInterface(){
     myGLCD.fillRect(50, 35, 428, 143);
     myGLCD.setColor(WHITE);
     myGLCD.setBackColor(102, 102, 102);
-    myGLCD.print("Linke Schirmseite", 177, 40);
+    myGLCD.print("Beschleunigerleine", 177, 40);
 
     myGLCD.setColor(WHITE);
     myGLCD.drawLine(70, 57, 70, 128);
@@ -252,7 +252,7 @@ void setupInterface(){
     myGLCD.fillRect(50, 153, 428, 261);
     myGLCD.setColor(WHITE);
     myGLCD.setBackColor(102, 102, 102);
-    myGLCD.print("Rechte Schirmseite", 177, 158);
+    myGLCD.print("A-Leine", 177, 158);
 
     myGLCD.setColor(WHITE);
     myGLCD.drawLine(70, 175, 70, 246);
