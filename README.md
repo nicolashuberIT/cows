@@ -74,7 +74,7 @@ Nicolas
 
 ### Introduction
 
-`COWS` was built on an Arduino Mega platform. The individual components are described in the paper, the programming is based on C++. The system can measure the line tension at various points on the paraglider using load cells. Based on these measurements, an assessment of the danger potential of a situation is made several times per second. This works by means of rules and limit values, which were determined in an empirical study under laboratory conditions. The system is to be regarded as a first prototype and serves as a platform for advanced models.
+`COWS` was built on an Arduino Mega platform. The individual components are described in the paper, the programming is based on C++. The system can measure the line tension at various points on the paraglider using load cells. Based on these measurements, an assessment of the danger potential of a situation is made several times per second. This works by means of rules and limit values, which were determined in an empirical study under laboratory conditions. The system is to be regarded as a first prototype and serves as a platform for future development efforts.
 
 ### Architecture
 
