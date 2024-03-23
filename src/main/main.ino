@@ -1,7 +1,7 @@
 /*
    main.ino
    Concepted and written by Nicolas Huber
-   Version: 20221123
+   Version reference: 2022-11-23 as of Matura Thesis
    Updated by 2024-03-31 as of the Schweizer Jugend forscht 2024 initiative
 */
 
@@ -9,7 +9,7 @@
 
 // TONE (to disable tone set value to 0, other 1)
 
-int index_tone = 0;
+int index_tone = 1;
 
 // WARNINGS (to disable warnings set value to 0, other 1)
 
@@ -595,39 +595,21 @@ void resetGraphs(int runtime){
 
 }
 
-void serialPrint(int milliseconds, int data_left, int data_right, int average_left, int average_right, int danger_index_left, int danger_index_right){
+void serialPrint(int runtime, int data_left, int data_right, int average_left, int average_right, int danger_index_left, int danger_index_right){
 
-    Serial.print("Index: time, data, average, danger index | ");
-    Serial.print(milliseconds);
-    Serial.print(" [s], ");
+    // index: timestamp, value_left, value_right, average_left, average_right, danger_index_left, danger_index_right
+    Serial.print(runtime);
+    Serial.print(", ");
     Serial.print(data_left);
-    Serial.print(" [kg],");
+    Serial.print(", ");
+    Serial.print(data_right);
+    Serial.print(", ");
     Serial.print(average_left);
-    Serial.print(" [kg],");
+    Serial.print(", ");
+    Serial.print(average_right);
+    Serial.print(", ");
     Serial.print(danger_index_left);
-    Serial.print(" [i] |");
-
-    if(danger_index_left*left == 2 || danger_index_right*right == 2){
-
-        Serial.print("");
-        Serial.print(" ----> !!! SERIOUS DANGER !!! <----");
-
-    }
-
-    else if(danger_index_left*left == 1 || danger_index_right*right == 1){
-
-        Serial.print("");
-        Serial.print(" ----> ??? POTENTIAL DANGER ??? <----");
-
-    }
-
-    else{
-
-        Serial.print("");
-        Serial.print(" ----> ... SAFE FLIGHT ... <----");
-
-    }
-
-    Serial.println();
+    Serial.print(", ");
+    Serial.println(danger_index_right);    
 
 }
