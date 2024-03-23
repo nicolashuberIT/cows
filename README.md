@@ -3,12 +3,6 @@
 [![nicolashuberIT - COWS](https://img.shields.io/static/v1?label=nicolashuberIT&message=COWS&color=blue&logo=github)](https://github.com/nicolashuberIT/COWS "Go to GitHub repo")
 [![License](https://img.shields.io/badge/License-INDIVIDUAL-blue)](#license)
 
----
-
-![COWS V2_full logo_white](https://user-images.githubusercontent.com/113937779/201402566-23deb7f4-9e8a-4027-8e35-df0ce20322e4.png)
-
----
-
 ## Overview
 
 The `COWS` system is part of the scientific paper "Fliegen am Limit - Aktive Sicherheit im Gleitschirmsport", that was first published on 10/24/2022 and is being further developped by 03/31/2024 as of the "Schweizer Jugend forscht 2024" initiative. In summary, this tool implements the algorithms and concepts developed in the paper for the prediction of dangerous flight conditions in a system that works reliably under laboratory conditions. Please find a detailed description of the tool in the paper.
@@ -60,6 +54,22 @@ Nicolas
 
 ---
 
+## Contents
+
+- [COWS](#cows)
+  - [Overview](#overview)
+  - [Contents](#contents)
+  - [Technical documentation](#technical-documentation)
+    - [Introduction](#introduction)
+    - [Architecture](#architecture)
+    - [Contributing](#contributing)
+    - [Changelog](#changelog)
+  - [License \& Intellectual Property](#license--intellectual-property)
+  - [Disclaimer](#disclaimer)
+
+
+---
+
 ## Technical documentation
 
 ### Introduction
@@ -72,7 +82,9 @@ The application is structured as follows:
 
 ```txt
 ⎡ COWS
-⎢ ⟶ main.ino
+⎢ ⟶ src/
+⎢   ⟶ main/
+⎢   ⟶ exhibition/
 ⎢ ⟶ LICENSE.md
 ⎢ ⟶ README.md
 ⎣
@@ -97,6 +109,11 @@ The source code of this application is licensed under the license linked [here](
 If not stated differently, the source code of this project is Nicolas Huber's intellectual property. External sources can be found in the code and are marked as such. 
 
 In consideration of the `LICENSE.md`, the licensee, who is considered as such at the point of downloading this application, agrees to respect the terms and conditions. The licensee undertakes to show respect for Nicolas Huber's intellectual property and to use it only in accordance with his instructions.
+
+The tool is branded as follows:
+
+![COWS V2_full logo_white](https://user-images.githubusercontent.com/113937779/201402566-23deb7f4-9e8a-4027-8e35-df0ce20322e4.png)
+
 
 Thanks for noticing! 
 
