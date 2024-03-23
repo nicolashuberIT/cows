@@ -36,7 +36,7 @@ Unless prior written consent has been optained from the software owner Nicolas H
 * Alteration or removal of any notices in or on the software or within the documentation included within the software.
 * Any distribution of the software by the licensee that is not conducted with approval from Nicolas Huber.
 * Disclosure of any source codes pertaining to the software to any additional parties not included in this agreement.
-* The licensee shall not dissassemble, recompile, or reverse engineer any object code containted within the software.
+* The licensee shall not dissassemble, recompile, or reverse engineer any object code contained within the software.
 
 All software included in this source code license agreement as well as all documentation provided with said software publically is in a "as is" condition.
 
