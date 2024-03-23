@@ -64,7 +64,7 @@ Under no circumstances will Nicolas Huber be held liable for any damage resultin
 
 Copyright Notice: The licensee agrees to display an appropriate copyright notice in any final versions of the software containing the source code in privately distributed projects. It's strictly forbidden to publically share the software containing elements of this project!
 
-Applicable Law: Any disputed to this agreement shall be resolved in accordance with the laws of Switzerland and any and all legal proceedings shall take place as such.
+Applicable Law: Any disputes to this agreement shall be resolved in accordance with the laws of Switzerland and any and all legal proceedings shall take place as such.
 
 Modification: No terms and conditions on this agreement shall be modified or replaced without the written consent of Nicolas Huber. These conditions may be adapted in the future.
 
