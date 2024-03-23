@@ -5,7 +5,7 @@
 
 ## Overview
 
-The `COWS` system is part of the scientific paper "Fliegen am Limit - Aktive Sicherheit im Gleitschirmsport", that was first published on 10/24/2022 and is being further developped by 03/31/2024 as of the "Schweizer Jugend forscht 2024" initiative. In summary, this tool implements the algorithms and concepts developed in the paper for the prediction of dangerous flight conditions in a system that works reliably under laboratory conditions. Please find a detailed description of the tool in the paper.
+`COWS` is part of the scientific paper "Fliegen am Limit - Aktive Sicherheit im Gleitschirmsport", that was first published on 10/24/2022 and is being further developped by 03/31/2024 as of the "Schweizer Jugend forscht 2024" initiative. In summary, this tool implements the algorithms and concepts developed in the paper for the prediction of dangerous flight conditions in a system that works reliably under laboratory conditions. Please find a detailed description of the tool in the paper.
 
 Both the original and updated paper are listed below: 
 
@@ -74,7 +74,7 @@ Nicolas
 
 ### Introduction
 
-Introduction will follow soon.
+`COWS` was built on an Arduino Mega platform. The individual components are described in the paper, the programming is based on C++. The system can measure the line tension at various points on the paraglider using load cells. Based on these measurements, an assessment of the danger potential of a situation is made several times per second. This works by means of rules and limit values, which were determined in an empirical study under laboratory conditions. The system is to be regarded as a first prototype and serves as a platform for advanced models.
 
 ### Architecture
 
