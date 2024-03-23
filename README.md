@@ -82,6 +82,7 @@ The application is structured as follows:
 
 ```txt
 ⎡ COWS
+⎢ ⟶ docs/
 ⎢ ⟶ src/
 ⎢   ⟶ main/
 ⎢   ⟶ exhibition/
@@ -118,7 +119,7 @@ The tool is branded as follows:
 </tr>
 <tr>
   <td>
-    <img src="[/docs/images/20230618_SJf_cover-image_daniela-arslan.jpg](https://user-images.githubusercontent.com/113937779/201402566-23deb7f4-9e8a-4027-8e35-df0ce20322e4.png)" alt="Branding">
+    <img src="/docs/20240323_SJf_cows-branding_nicolas-huber.png" alt="Branding">
       <br>
       <em>Fig. 1: COWS Branding</em>
     </td>
