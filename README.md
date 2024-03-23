@@ -114,7 +114,6 @@ The tool is branded as follows:
 
 ![COWS V2_full logo_white](https://user-images.githubusercontent.com/113937779/201402566-23deb7f4-9e8a-4027-8e35-df0ce20322e4.png)
 
-
 Thanks for noticing! 
 
 ---
