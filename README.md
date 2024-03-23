@@ -112,7 +112,18 @@ In consideration of the `LICENSE.md`, the licensee, who is considered as such at
 
 The tool is branded as follows:
 
-![COWS V2_full logo_white](https://user-images.githubusercontent.com/113937779/201402566-23deb7f4-9e8a-4027-8e35-df0ce20322e4.png)
+<table>
+<tr>
+  <th>COWS Branding</th>
+</tr>
+<tr>
+  <td>
+    <img src="[/docs/images/20230618_SJf_cover-image_daniela-arslan.jpg](https://user-images.githubusercontent.com/113937779/201402566-23deb7f4-9e8a-4027-8e35-df0ce20322e4.png)" alt="Branding">
+      <br>
+      <em>Fig. 1: COWS Branding</em>
+    </td>
+</tr>
+</table>
 
 Thanks for noticing! 
 
