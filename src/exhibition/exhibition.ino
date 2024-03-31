@@ -1,7 +1,7 @@
 /*
    exhibition.ino
    Concepted and written by Nicolas Huber
-   Version reference: 2022-11-23 as of Matura Thesis
+   Version reference: 2022-11-22 as of Matura Thesis
    Updated by 2024-03-31 as of the Schweizer Jugend forscht 2024 initiative
 
    EXHIBITION VERSION

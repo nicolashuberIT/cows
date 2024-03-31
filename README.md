@@ -99,7 +99,7 @@ Feel free to contact the author (Nicolas Huber) for any questions or suggestions
 
 ### Changelog
 
-- **[1.0.0]** - Not released yet.
+- **[1.0.0]** - Codebase by 11/23/2022, published as of **Schweizer Jugend forscht 2024** by 03/31/2024.
 
 ---
 
