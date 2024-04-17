@@ -22,6 +22,10 @@ int right = 1; // right sensor built into A-line
 
 int sensitivity = 1.25;
 
+// SIMULATION
+
+float simulation_counter = 0;
+
 ////////// BASICS //////////
 
 // ------ LIBRARIES ------
@@ -127,13 +131,25 @@ void loop() {
 // ------  INPUT DATA ------
 
     data_left = getDataLeft();
-    data_right = getDataRight();
+    // data_right = getDataRight(); disabled for exhibition purposes, see section "SIMULATION" below
+
+// ------ SIMULATION ------
+
+    data_right = simulateData(simulation_counter);
+
+    if (simulation_counter >= 6.28) {
+        simulation_counter = 0;
+    } else {
+        simulation_counter += 0.1;
+    } 
+
+    simulation_counter = simulation_counter + 0.1;
     displayData(data_left, data_right);
 
 // ------ FLOATING AVERAGE ------
 
     average_left = calculateAverageLeft(data_left);
-    average_right = calculateAverageRight(data_right);
+    average_right = calculateAverageRight(data_right) - 10;
     displayAverage(average_left, average_right);
 
 // ------ GRAPHING ------
@@ -144,7 +160,8 @@ void loop() {
 // ------ WARNINGS ------
 
     danger_index_left = getDangerIndexLeft(average_left, data_left, left);
-    danger_index_right = getDangerIndexRight(average_right, data_right, right);
+    // danger_index_right = getDangerIndexRight(average_right, data_right, right); disabled for exhibition purposes, see line below
+    danger_index_right = 0;
     visualWarning(danger_index_left, danger_index_right);
     audioWarning(danger_index_left, danger_index_right);
 
@@ -223,7 +240,7 @@ void setupInterface(){
     myGLCD.fillRect(50, 35, 428, 143);
     myGLCD.setColor(WHITE);
     myGLCD.setBackColor(102, 102, 102);
-    myGLCD.print("Beschleunigerleine", 177, 40);
+    myGLCD.print("Linke Schirmseite (L)", 150, 40);
 
     myGLCD.setColor(WHITE);
     myGLCD.drawLine(70, 57, 70, 128);
@@ -239,7 +256,7 @@ void setupInterface(){
     myGLCD.drawLine(70, 114, 75, 114);
     myGLCD.drawLine(403, 114, 408, 114);
 
-    myGLCD.print("[n]", 68, 40);
+    myGLCD.print("[kg]", 68, 40);
     myGLCD.print("[t]", 235, 132);
 
     myGLCD.print(" +", 53, 53);
@@ -252,7 +269,7 @@ void setupInterface(){
     myGLCD.fillRect(50, 153, 428, 261);
     myGLCD.setColor(WHITE);
     myGLCD.setBackColor(102, 102, 102);
-    myGLCD.print("A-Leine", 177, 158);
+    myGLCD.print("Rechte Schirmseite (R) [simuliert]", 110, 158);
 
     myGLCD.setColor(WHITE);
     myGLCD.drawLine(70, 175, 70, 246);
@@ -321,6 +338,10 @@ int getDataRight(){
 
     return data_right;
 
+}
+
+float simulateData(float simulation_counter) {
+    return 20 + 15 * sin(simulation_counter);
 }
 
 void displayData(int data_left, int data_right){
